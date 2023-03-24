@@ -27,10 +27,10 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: backend
 
-  codecov-demo-for-frontend:
-    runs-on: ubuntu:latest
-
-    steps:
+#  codecov-demo-for-frontend:
+#    runs-on: ubuntu:latest
+#
+#    steps:
       - name: Checkout
         uses: actions/checkout@v3
 #    for frontend
@@ -52,10 +52,10 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: frontend
 
-  codecov-demo-for-python-client:
-    runs-on: ubuntu:latest
+#  codecov-demo-for-python-client:
+#    runs-on: ubuntu:latest
 
-    steps:
+#    steps:
       - name: Checkout
         uses: actions/checkout@v3
 #    for python client
