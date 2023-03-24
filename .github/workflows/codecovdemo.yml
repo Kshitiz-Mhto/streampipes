@@ -1,0 +1,81 @@
+name: testing codecov
+
+on:
+  push:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  codecov-demo-for-java:
+    runs-on: ubuntu:latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+#    for java backend
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+      - name: Install dependencies
+        run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: backend
+
+  codecov-demo-for-frontend:
+    runs-on: ubuntu:latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+#    for frontend
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'npm'
+          cache-dependency-path: ui/package-lock.json
+      - name: App - install dependencies
+        working-directory: ./ui
+        run: npm install
+      - name: App - Run the tests
+        working-directory: ./ui
+        run: npm run test
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: frontend
+
+  codecov-demo-for-python-client:
+    runs-on: ubuntu:latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+#    for python client
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+          cache: 'pip'
+      - name: Install Python dependencies
+        working-directory: ./streampipes-client-python
+        run: |
+          python -m pip install --upgrade pip
+          pip install wheel
+          pip install -e ".[dev]"
+      - name: Run unit-tests
+        working-directory: ./streampipes-client-python
+        run: |
+          make unit-tests
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: python-client
