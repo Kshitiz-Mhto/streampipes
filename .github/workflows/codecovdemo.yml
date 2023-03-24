@@ -1,6 +1,8 @@
 name: testing codecov
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  pull_request:
 
 jobs:
   codecov-demo-for-java:
@@ -9,7 +11,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-#   for java backend
+#    for java backend
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -30,7 +32,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-#   for frontend
+#    for frontend
       - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -55,7 +57,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-#   for python client
+#    for python client
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
