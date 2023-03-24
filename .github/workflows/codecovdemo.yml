@@ -1,6 +1,7 @@
 name: testing codecov
 
 on:
+  push:
   workflow_dispatch:
   pull_request:
 
