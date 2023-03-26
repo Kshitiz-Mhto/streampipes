@@ -162,7 +162,7 @@ jobs:
         working-directory: ./streampipes-client-python
         run: |
           make unit-tests
-          ls -R .
+          ls -aR .
 
   python-doc-checks:
     runs-on: ubuntu-latest
