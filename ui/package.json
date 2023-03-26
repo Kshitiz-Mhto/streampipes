@@ -28,7 +28,8 @@
     "test-cypress-smoke": "npx cypress run --spec 'cypress/tests/**/*.smoke.spec.ts'",
     "test-cypress-all": "npx cypress run --spec 'cypress/tests/**/*.spec.ts'",
     "prepare": "cd ../ && husky install ./ui/.husky",
-    "postinstall": "npm run build-libraries"
+    "postinstall": "npm run build-libraries",
+    "cover": "istanbul cover npx cypress run --spec 'cypress/tests/**/*.spec.ts' --dir ./coverage/"
   },
   "dependencies": {
     "@angular-architects/module-federation": "^14.3.14",
@@ -126,6 +127,7 @@
     "eslint-config-prettier": "^8.6.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.2",
+    "istanbul": "^1.1.0-alpha.1",
     "jasmine-core": "^4.5.0",
     "js-yaml": "^4.1.0",
     "karma": "~6.4.1",

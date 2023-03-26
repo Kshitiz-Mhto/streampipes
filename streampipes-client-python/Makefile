@@ -51,4 +51,4 @@ pre-commit:
 
 .PHONY: unit-tests
 unit-tests:
-	pytest --cov=streampipes tests/ --cov-fail-under=90 --cov-report term-missing --no-cov-on-fail
+	pytest --cov=streampipes tests/ --cov-fail-under=90 --cov-report=xml:./.coverage-reports/coverage.xml --cov-config=.coveragerc --cov-branch --no-cov-on-fail
